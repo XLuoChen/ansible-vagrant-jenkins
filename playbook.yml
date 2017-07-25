@@ -3,15 +3,6 @@
   become: true
 
   tasks:
-    - name: Update apt cache
-      apt: update_cache=yes
-
-    - name: Installing necessary packets
-      apt: name=jenkins update_cache=yes state=present
-      with_items:
-        - nginx
-        - openjdk-7-jdk
-
     - name: Add Jenkins apt repository key.
       apt_key:
         url: https://jenkins-ci.org/debian/jenkins-ci.org.key
@@ -24,7 +15,10 @@
         state: present
         update_cache: yes
 
+    - name: Update apt cache
+      apt: update_cache=yes
+
     - name: Installing Jenkins
-      apt: name=jenkins update_cache=yes state=present
-      with_items:
-        - jenkins
+      apt:
+        name: jenkins
+        state: latest
