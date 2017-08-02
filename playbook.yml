@@ -36,3 +36,5 @@
       apt:
         name: jenkins
         state: latest
+
+- include: plugins.yml
